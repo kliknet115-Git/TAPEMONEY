@@ -28,6 +28,8 @@
 		1019 /* MockNFCData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2019 /* MockNFCData.swift */; };
 		1020 /* CardDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2020 /* CardDataRepository.swift */; };
 		1021 /* CSVExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2021 /* CSVExportService.swift */; };
+		1051 /* ReceiptGeneratorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2051 /* ReceiptGeneratorService.swift */; };
+		1052 /* ReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2052 /* ReceiptView.swift */; };
 		1022 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022 /* HomeViewModel.swift */; };
 		1023 /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2023 /* ScanViewModel.swift */; };
 		1024 /* CardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2024 /* CardListViewModel.swift */; };
@@ -72,6 +74,8 @@
 		2019 /* MockNFCData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNFCData.swift; sourceTree = "<group>"; };
 		2020 /* CardDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDataRepository.swift; sourceTree = "<group>"; };
 		2021 /* CSVExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVExportService.swift; sourceTree = "<group>"; };
+		2051 /* ReceiptGeneratorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptGeneratorService.swift; sourceTree = "<group>"; };
+		2052 /* ReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptView.swift; sourceTree = "<group>"; };
 		2022 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		2023 /* ScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModel.swift; sourceTree = "<group>"; };
 		2024 /* CardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewModel.swift; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 			children = (
 				2020 /* CardDataRepository.swift */,
 				2021 /* CSVExportService.swift */,
+				2051 /* ReceiptGeneratorService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 				2028 /* StatusPillView.swift */,
 				2029 /* TransactionRowView.swift */,
 				2030 /* MetricCardView.swift */,
+				2052 /* ReceiptView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -398,6 +404,8 @@
 				1019 /* MockNFCData.swift in Sources */,
 				1020 /* CardDataRepository.swift in Sources */,
 				1021 /* CSVExportService.swift in Sources */,
+				1051 /* ReceiptGeneratorService.swift in Sources */,
+				1052 /* ReceiptView.swift in Sources */,
 				1022 /* HomeViewModel.swift in Sources */,
 				1023 /* ScanViewModel.swift in Sources */,
 				1024 /* CardListViewModel.swift in Sources */,
