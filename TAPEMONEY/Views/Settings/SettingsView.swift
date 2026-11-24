@@ -1,18 +1,12 @@
 import SwiftUI
-import SwiftData
 
 /// Halaman Pengaturan, Diagnostik NFC, dan Kebijakan Privasi (Bab 10.6 PRD)
 public struct SettingsView: View {
     @EnvironmentObject private var repository: CardDataRepository
     @EnvironmentObject private var nfcCoordinator: NFCScanCoordinator
-    @StateObject private var viewModel: SettingsViewModel
+    @StateObject private var viewModel = SettingsViewModel()
 
-    public init() {
-        _viewModel = StateObject(wrappedValue: SettingsViewModel(
-            repository: CardDataRepository(modelContext: ModelContext(try! ModelContainer(for: CardProfile.self))),
-            nfcCoordinator: NFCScanCoordinator()
-        ))
-    }
+    public init() {}
 
     public var body: some View {
         NavigationStack {

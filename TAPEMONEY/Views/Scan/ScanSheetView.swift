@@ -161,7 +161,7 @@ public struct ScanSheetView: View {
             return "Membaca Data..."
         case .success:
             return "Pembacaan Selesai!"
-        case .failed(let err):
+        case .failed:
             return "Gagal Membaca"
         case .unsupported:
             return "Kartu Belum Didukung"

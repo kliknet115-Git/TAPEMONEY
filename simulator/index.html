@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAPEMONEY — iOS Simulator (Interactive UI/UX)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <div class="desktop-layout">
+    <!-- Sidebar Control Panel -->
+    <div class="control-panel">
+      <div class="panel-header">
+        <div class="app-brand">
+          <i class="fa-solid fa-credit-card icon-brand"></i>
+          <div>
+            <h2>TAPEMONEY</h2>
+            <span class="badge-ios">iOS 17 Native Simulator</span>
+          </div>
+        </div>
+        <p class="panel-desc">Uji coba interaktif UI/UX pembacaan NFC kartu e-money secara langsung di browser Anda.</p>
+      </div>
+
+      <div class="test-cards-section">
+        <h3><i class="fa-solid fa-microchip"></i> Simulasikan Tap Kartu Fisik:</h3>
+        <p class="hint">Pilih kartu di bawah ini untuk mensimulasikan penempelan kartu ke sensor NFC iPhone:</p>
+
+        <div class="card-buttons">
+          <button class="btn-card bca" onclick="simulateCardTap('bca')">
+            <div class="card-btn-icon"><i class="fa-solid fa-wave-square"></i></div>
+            <div class="card-btn-text">
+              <strong>BCA Flazz (Gen 2)</strong>
+              <span>Pilot Candidate • Saldo & 10 Transaksi</span>
+            </div>
+            <span class="tap-badge">TAP</span>
+          </button>
+
+          <button class="btn-card mandiri" onclick="simulateCardTap('mandiri')">
+            <div class="card-btn-icon"><i class="fa-solid fa-wave-square"></i></div>
+            <div class="card-btn-text">
+              <strong>Mandiri e-money (v2.0)</strong>
+              <span>ISO 7816 Read Binary • Saldo Cepat</span>
+            </div>
+            <span class="tap-badge">TAP</span>
+          </button>
+
+          <button class="btn-card bni" onclick="simulateCardTap('bni')">
+            <div class="card-btn-icon"><i class="fa-solid fa-wave-square"></i></div>
+            <div class="card-btn-text">
+              <strong>BNI TapCash (Gen 2)</strong>
+              <span>Smartcard AID Inquiry</span>
+            </div>
+            <span class="tap-badge">TAP</span>
+          </button>
+
+          <button class="btn-card bri" onclick="simulateCardTap('bri')">
+            <div class="card-btn-icon"><i class="fa-solid fa-wave-square"></i></div>
+            <div class="card-btn-text">
+              <strong>BRI BRIZZI (Gen 2)</strong>
+              <span>ISO 7816 Smart Tag</span>
+            </div>
+            <span class="tap-badge">TAP</span>
+          </button>
+
+          <button class="btn-card unknown" onclick="simulateCardTap('unknown')">
+            <div class="card-btn-icon"><i class="fa-solid fa-question"></i></div>
+            <div class="card-btn-text">
+              <strong>Kartu Belum Didukung</strong>
+              <span>Uji Fallback Handler</span>
+            </div>
+            <span class="tap-badge">TEST</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <div class="status-summary">
+          <i class="fa-solid fa-shield-halved text-success"></i>
+          <span>100% Offline • SwiftData Emulated • Read-Only</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- iPhone 15 Pro Device Frame -->
+    <div class="device-wrapper">
+      <div class="iphone-15-frame">
+        <!-- Speaker / Dynamic Island -->
+        <div class="dynamic-island">
+          <div class="island-camera"></div>
+          <div class="island-sensor"></div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+          <span class="time" id="currentTime">09:41</span>
+          <div class="status-icons">
+            <i class="fa-solid fa-signal"></i>
+            <i class="fa-solid fa-wifi"></i>
+            <i class="fa-solid fa-battery-full"></i>
+          </div>
+        </div>
+
+        <!-- App Screen Container -->
+        <div class="screen-content" id="screenContent">
+          
+          <!-- TAB 1: BERANDA -->
+          <div class="tab-page active" id="tab-home">
+            <header class="app-header">
+              <div>
+                <span class="app-subtitle">TAPEMONEY</span>
+                <h1 class="app-title">Beranda</h1>
+              </div>
+              <button class="icon-btn" onclick="openSimulationSheet()"><i class="fa-solid fa-ellipsis"></i></button>
+            </header>
+
+            <div class="nfc-banner">
+              <div class="nfc-dot"></div>
+              <div>
+                <strong>NFC iPhone Siap</strong>
+                <p>Sensor Core NFC aktif di belakang atas</p>
+              </div>
+              <span class="pill-ready">READY</span>
+            </div>
+
+            <!-- Big Scan Button Hero -->
+            <div class="hero-scan-card" onclick="openScanModal()">
+              <div class="radar-pulse">
+                <div class="ring ring-1"></div>
+                <div class="ring ring-2"></div>
+                <div class="scan-icon-center">
+                  <i class="fa-solid fa-rss"></i>
+                </div>
+              </div>
+              <h2>SCAN KARTU SEKARANG</h2>
+              <p>Tempelkan kartu e-money di belakang iPhone</p>
+              <div class="supported-tags">
+                <span>Flazz</span>
+                <span>e-money</span>
+                <span>TapCash</span>
+                <span>BRIZZI</span>
+              </div>
+            </div>
+
+            <!-- Quick Metrics -->
+            <div class="metrics-grid">
+              <div class="metric-box">
+                <i class="fa-solid fa-credit-card text-blue"></i>
+                <span class="metric-label">Kartu Tersimpan</span>
+                <strong class="metric-val" id="metricCardCount">3</strong>
+                <span class="metric-sub">Offline di iPhone</span>
+              </div>
+              <div class="metric-box">
+                <i class="fa-solid fa-wallet text-green"></i>
+                <span class="metric-label">Total Saldo Terbaca</span>
+                <strong class="metric-val" id="metricTotalBalance">Rp 284.000</strong>
+                <span class="metric-sub">Terverifikasi</span>
+              </div>
+            </div>
+
+            <!-- Recent Cards Header -->
+            <div class="section-title">
+              <h3>Kartu Terakhir</h3>
+              <a href="javascript:void(0)" onclick="switchTab('cards')">Lihat Semua</a>
+            </div>
+
+            <div class="recent-cards-slider" id="recentCardsSlider">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="section-title">
+              <h3>Aktivitas Scan</h3>
+              <a href="javascript:void(0)" onclick="switchTab('history')">Riwayat</a>
+            </div>
+            <div class="recent-scans-list" id="recentScansList">
+              <!-- Rendered via JS -->
+            </div>
+
+          </div>
+
+          <!-- TAB 2: KARTU SAYA -->
+          <div class="tab-page" id="tab-cards">
+            <header class="app-header">
+              <div>
+                <span class="app-subtitle">MANAJEMEN</span>
+                <h1 class="app-title">Kartu Saya</h1>
+              </div>
+            </header>
+            <div class="cards-list-view" id="allCardsListView">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- TAB 3: RIWAYAT -->
+          <div class="tab-page" id="tab-history">
+            <header class="app-header">
+              <div>
+                <span class="app-subtitle">ARSIP OFFLINE</span>
+                <h1 class="app-title">Riwayat Scan</h1>
+              </div>
+              <button class="icon-btn" onclick="openReceiptModal()" title="Bagikan Struk Transaksi"><i class="fa-solid fa-share-nodes"></i></button>
+            </header>
+
+            <div class="offline-warning-pill">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              <span>Catatan: Data di bawah adalah arsip hasil pembacaan lokal, bukan mutasi real-time server bank.</span>
+            </div>
+
+            <div class="filter-pills" id="historyFilters">
+              <button class="pill active" onclick="filterHistory('all')">Semua</button>
+              <button class="pill" onclick="filterHistory('bca')">Flazz</button>
+              <button class="pill" onclick="filterHistory('mandiri')">e-money</button>
+              <button class="pill" onclick="filterHistory('bni')">TapCash</button>
+              <button class="pill" onclick="filterHistory('bri')">BRIZZI</button>
+            </div>
+
+            <div class="history-list" id="fullHistoryList">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- TAB 4: PENGATURAN -->
+          <div class="tab-page" id="tab-settings">
+            <header class="app-header">
+              <div>
+                <span class="app-subtitle">PREFERENSI</span>
+                <h1 class="app-title">Pengaturan</h1>
+              </div>
+            </header>
+
+            <div class="settings-group">
+              <span class="group-title">SENSOR & PERANGKAT</span>
+              <div class="settings-row">
+                <span>Core NFC Hardware</span>
+                <strong class="text-green">Tersedia (Ready)</strong>
+              </div>
+              <div class="settings-row">
+                <span>Metode Pembacaan</span>
+                <span class="text-muted">ISO 7816 / APDU</span>
+              </div>
+            </div>
+
+            <div class="settings-group">
+              <span class="group-title">MATRIKS TARGET KARTU (PRD v2.0)</span>
+              <div class="matrix-card">
+                <div class="matrix-item">
+                  <strong>BCA Flazz (Gen 2)</strong>
+                  <span class="status-tag ok">Saldo & Riwayat</span>
+                </div>
+                <div class="matrix-item">
+                  <strong>Mandiri e-money (v2.0)</strong>
+                  <span class="status-tag ok">Saldo Didukung</span>
+                </div>
+                <div class="matrix-item">
+                  <strong>BNI TapCash (Gen 2)</strong>
+                  <span class="status-tag ok">Saldo Didukung</span>
+                </div>
+                <div class="matrix-item">
+                  <strong>BRI BRIZZI (Gen 2)</strong>
+                  <span class="status-tag ok">Saldo Didukung</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-group">
+              <span class="group-title">PRIVASI & KEAMANAN</span>
+              <div class="settings-row">
+                <span>Mode Aplikasi</span>
+                <strong class="text-blue">Hanya-Baca (Read-Only)</strong>
+              </div>
+              <div class="settings-row">
+                <span>Koneksi Server</span>
+                <span class="text-muted">0 Cloud (100% Offline)</span>
+              </div>
+            </div>
+
+            <div class="settings-group">
+              <button class="btn-danger-reset" onclick="resetAllData()"><i class="fa-solid fa-trash"></i> Hapus Seluruh Data & Riwayat</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Native iOS Tab Bar -->
+        <nav class="tab-bar">
+          <button class="tab-item active" onclick="switchTab('home')" id="nav-home">
+            <i class="fa-solid fa-rss"></i>
+            <span>Beranda</span>
+          </button>
+          <button class="tab-item" onclick="switchTab('cards')" id="nav-cards">
+            <i class="fa-solid fa-credit-card"></i>
+            <span>Kartu Saya</span>
+          </button>
+          <button class="tab-item" onclick="switchTab('history')" id="nav-history">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Riwayat</span>
+          </button>
+          <button class="tab-item" onclick="switchTab('settings')" id="nav-settings">
+            <i class="fa-solid fa-gear"></i>
+            <span>Pengaturan</span>
+          </button>
+        </nav>
+
+        <!-- Home Bar Indicator -->
+        <div class="home-indicator"></div>
+
+        <!-- MODAL: NFC SCANNING SHEET (Core NFC iOS Emulation) -->
+        <div class="modal-backdrop" id="nfcModal">
+          <div class="nfc-sheet">
+            <div class="sheet-drag-handle"></div>
+            <div class="nfc-radar-large">
+              <div class="radar-outer"></div>
+              <div class="radar-mid"></div>
+              <div class="radar-core">
+                <i class="fa-solid fa-rss"></i>
+              </div>
+            </div>
+            <h3 id="nfcStatusTitle">Siap Memindai</h3>
+            <p id="nfcStatusDesc">Posisikan kartu e-money menempel kuat di bagian belakang atas iPhone Anda.</p>
+            <button class="btn-cancel-scan" onclick="closeScanModal()">Batal</button>
+          </div>
+        </div>
+
+        <!-- MODAL: HASIL SCAN (ScanResultView) -->
+        <div class="modal-backdrop" id="resultModal">
+          <div class="result-sheet">
+            <div class="sheet-header">
+              <h3>Hasil Pembacaan</h3>
+              <button class="btn-close" onclick="closeResultModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="result-body" id="resultModalBody">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- MODAL: STRUK BELANJA BELANJA (Thermal Receipt View) -->
+        <div class="modal-backdrop" id="receiptModal">
+          <div class="receipt-sheet">
+            <div class="sheet-header">
+              <h3 id="receiptModalTitle">Struk Catatan Transaksi</h3>
+              <button class="btn-close" onclick="closeReceiptModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Mode Switcher: 1 Transaksi Saja vs Semua Transaksi -->
+            <div class="receipt-mode-toggle">
+              <button class="mode-btn active" id="btnModeSingle" onclick="setReceiptMode('single')">1 Transaksi Saja</button>
+              <button class="mode-btn" id="btnModeAll" onclick="setReceiptMode('all')">Semua Transaksi</button>
+            </div>
+
+            <!-- Single Tx Picker Selector -->
+            <div class="single-tx-picker" id="singleTxPickerWrapper">
+              <label><i class="fa-solid fa-receipt"></i> Transaksi Terpilih:</label>
+              <select id="singleTxSelect" onchange="onSingleTxChange(this.value)"></select>
+            </div>
+
+            <div class="receipt-preview-scroll">
+              <!-- Thermal Receipt Paper -->
+              <div class="thermal-receipt" id="thermalReceiptNode">
+                <div class="receipt-jagged-top"></div>
+                <div class="receipt-content">
+                  <div class="receipt-store-title">TAPEMONEY</div>
+                  <div class="receipt-store-sub">STRUK CATATAN TRANSAKSI E-MONEY</div>
+                  <div class="receipt-store-desc">OFFLINE CHIP READER • ISO 7816</div>
+                  <div class="receipt-divider-dashed">--------------------------------</div>
+
+                  <div class="receipt-info-table" id="receiptInfoTable">
+                    <!-- Populated via JS -->
+                  </div>
+
+                  <div class="receipt-divider-dashed">--------------------------------</div>
+                  
+                  <div class="receipt-tx-head">
+                    <span>TGL/JAM • TRANSAKSI</span>
+                    <span>NOMINAL</span>
+                  </div>
+                  <div class="receipt-divider-dotted">. . . . . . . . . . . . . . . .</div>
+
+                  <div class="receipt-tx-items" id="receiptTxItems">
+                    <!-- Populated via JS -->
+                  </div>
+
+                  <div class="receipt-divider-dashed">--------------------------------</div>
+
+                  <div class="receipt-summary-table" id="receiptSummaryTable">
+                    <!-- Populated via JS -->
+                  </div>
+
+                  <div class="receipt-divider-dashed">--------------------------------</div>
+
+                  <div class="receipt-barcode-box">
+                    <div class="receipt-barcode-lines"></div>
+                    <div class="receipt-barcode-text">* TAPEMONEY - STRUK OFFLINE *</div>
+                    <div class="receipt-footer-text">SIMPAN SEBAGAI BUKTI RIWAYAT CHIP</div>
+                  </div>
+                </div>
+                <div class="receipt-jagged-bottom"></div>
+              </div>
+            </div>
+
+            <!-- Export Buttons -->
+            <div class="receipt-actions">
+              <button class="btn-export-png" onclick="downloadReceiptPNG()">
+                <i class="fa-solid fa-image"></i> Unduh Gambar (PNG)
+              </button>
+              <button class="btn-export-pdf" onclick="downloadReceiptPDF()">
+                <i class="fa-solid fa-file-pdf"></i> Cetak / Simpan PDF
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

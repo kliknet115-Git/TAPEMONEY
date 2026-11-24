@@ -5,11 +5,9 @@ import SwiftData
 public struct CardListView: View {
     @Query(sort: \CardProfile.createdAt, order: .reverse) private var cards: [CardProfile]
     @EnvironmentObject private var repository: CardDataRepository
-    @StateObject private var viewModel: CardListViewModel
+    @StateObject private var viewModel = CardListViewModel()
 
-    public init() {
-        _viewModel = StateObject(wrappedValue: CardListViewModel(repository: CardDataRepository(modelContext: ModelContext(try! ModelContainer(for: CardProfile.self)))))
-    }
+    public init() {}
 
     public var body: some View {
         List {

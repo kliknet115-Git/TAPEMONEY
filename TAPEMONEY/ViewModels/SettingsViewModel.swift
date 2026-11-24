@@ -14,9 +14,6 @@ public struct CardMatrixItem: Identifiable {
 /// ViewModel untuk Pengaturan, Status NFC, dan Diagnostik (Bab 10.6 PRD)
 @MainActor
 public final class SettingsViewModel: ObservableObject {
-    public let repository: CardDataRepository
-    public let nfcCoordinator: NFCScanCoordinator
-
     @Published public var showResetConfirmation: Bool = false
     @Published public var resetSuccess: Bool = false
 
@@ -58,17 +55,5 @@ public final class SettingsViewModel: ObservableObject {
         )
     ]
 
-    public init(repository: CardDataRepository, nfcCoordinator: NFCScanCoordinator) {
-        self.repository = repository
-        self.nfcCoordinator = nfcCoordinator
-    }
-
-    public func resetDatabase() {
-        do {
-            try repository.resetAllData()
-            resetSuccess = true
-        } catch {
-            print("Gagal reset data: \(error)")
-        }
-    }
+    public init() {}
 }
