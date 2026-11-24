@@ -8,8 +8,7 @@ public struct CardListView: View {
     @StateObject private var viewModel: CardListViewModel
 
     public init() {
-        // ViewModel di-init kemudian diikat dengan repository di onAppear/modifier
-        _viewModel = StateObject(wrappedValue: CardListViewModel(repository: CardDataRepository(modelContext: try! ModelContext(ModelContainer(for: CardProfile.self)))))
+        _viewModel = StateObject(wrappedValue: CardListViewModel(repository: CardDataRepository(modelContext: ModelContext(try! ModelContainer(for: CardProfile.self)))))
     }
 
     public var body: some View {
