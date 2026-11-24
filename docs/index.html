@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAPEMONEY — Cek Saldo Kartu e-Money via NFC iPhone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --primary-dark: #004ecc;
+      --bg: #090d16;
+      --card-bg: #121826;
+      --card-border: #1f293d;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent: #22c55e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      padding: 40px 20px 20px;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(13, 110, 253, 0.15);
+      border: 1px solid rgba(13, 110, 253, 0.35);
+      color: #60a5fa;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 40%, #60a5fa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.lead {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 8px 24px rgba(13, 110, 253, 0.4);
+    }
+    .hero-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: rgba(96, 165, 250, 0.4); }
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+    }
+    .matrix-table th, .matrix-table td {
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 14px;
+    }
+    .matrix-table th {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .matrix-table tr:not(:last-child) td {
+      border-bottom: 1px solid var(--card-border);
+    }
+    .status-tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .status-ok { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+    .status-warn { background: rgba(234, 179, 8, 0.15); color: #facc15; }
+    .status-bad { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--card-border);
+      margin-top: 60px;
+    }
+    footer a { color: #60a5fa; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge">iOS Native • Core NFC • SwiftData</div>
+    <h1>TAPEMONEY</h1>
+    <p class="lead">Satu aplikasi iPhone untuk membaca saldo dan riwayat kartu e-money secara instan, aman, dan 100% offline.</p>
+    <a href="#matrix" class="hero-btn">Lihat Dukungan Kartu</a>
+  </header>
+
+  <div class="container">
+    <div class="features-grid">
+      <div class="card">
+        <div class="card-icon">⚡️</div>
+        <h3>Sekali Tap, Langsung Terbaca</h3>
+        <p>Cukup tempelkan kartu fisik e-money ke bagian belakang atas iPhone Anda. Sensor Core NFC membaca saldo chip secara instan.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🔒</div>
+        <h3>100% Offline & Privasi Terjaga</h3>
+        <p>Aplikasi beroperasi secara lokal tanpa server, tanpa akun login, dan tanpa koneksi internet. Data Anda tetap berada di perangkat Anda.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🛡️</div>
+        <h3>Aman & Read-Only</h3>
+        <p>Aplikasi bersifat hanya-baca. Tidak ada operasi pengubahan saldo, pembayaran, atau top-up yang dapat merusak chip kartu Anda.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🗂️</div>
+        <h3>Riwayat & Ekspor CSV</h3>
+        <p>Simpan riwayat scan lokal per kartu dengan nama alias seperti "Kartu Tol" atau "Kartu Cadangan", dan ekspor ke CSV kapan saja.</p>
+      </div>
+    </div>
+
+    <section id="matrix" style="margin-top: 40px;">
+      <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">Matriks Kompatibilitas Kartu</h2>
+      <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">Target pengembangan berdasarkan spesifikasi PRD v2.0:</p>
+
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>Kartu</th>
+            <th>Generasi</th>
+            <th>Saldo</th>
+            <th>Riwayat</th>
+            <th>Catatan Protokol</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>BCA Flazz</strong></td>
+            <td>Flazz Gen 2</td>
+            <td><span class="status-tag status-ok">Didukung</span></td>
+            <td><span class="status-tag status-ok">Didukung (Maks 10)</span></td>
+            <td>ISO 7816 APDU / Desfire EV2 (Kandidat Pilot)</td>
+          </tr>
+          <tr>
+            <td><strong>BCA Flazz</strong></td>
+            <td>Flazz Gen 1</td>
+            <td><span class="status-tag status-bad">Belum Didukung</span></td>
+            <td><span class="status-tag status-bad">Tidak Tersedia</span></td>
+            <td>Mifare Classic terenkripsi proprietary</td>
+          </tr>
+          <tr>
+            <td><strong>Mandiri e-money</strong></td>
+            <td>Versi 2.0</td>
+            <td><span class="status-tag status-ok">Didukung</span></td>
+            <td><span class="status-tag status-warn">Sesuai Chip</span></td>
+            <td>ISO 7816 APDU Read Binary</td>
+          </tr>
+          <tr>
+            <td><strong>BNI TapCash</strong></td>
+            <td>Gen 2</td>
+            <td><span class="status-tag status-ok">Didukung</span></td>
+            <td><span class="status-tag status-warn">Sesuai Chip</span></td>
+            <td>ISO 7816 Application Inquiry</td>
+          </tr>
+          <tr>
+            <td><strong>BRI BRIZZI</strong></td>
+            <td>Gen 2</td>
+            <td><span class="status-tag status-ok">Didukung</span></td>
+            <td><span class="status-tag status-warn">Sesuai Chip</span></td>
+            <td>ISO 7816 Application Inquiry</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <footer>
+    <p>TAPEMONEY — Dibangun dengan Swift & SwiftUI untuk iOS 17+</p>
+    <p style="margin-top: 8px;"><a href="privacy.html">Kebijakan Privasi</a> • Dibuat untuk penggunaan pribadi sesuai PRD v2.0</p>
+  </footer>
+
+</body>
+</html>
