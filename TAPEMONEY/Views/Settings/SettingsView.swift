@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 /// Halaman Pengaturan, Diagnostik NFC, dan Kebijakan Privasi (Bab 10.6 PRD)
 public struct SettingsView: View {
@@ -8,7 +9,7 @@ public struct SettingsView: View {
 
     public init() {
         _viewModel = StateObject(wrappedValue: SettingsViewModel(
-            repository: CardDataRepository(modelContext: try! ModelContext(ModelContainer(for: CardProfile.self))),
+            repository: CardDataRepository(modelContext: ModelContext(try! ModelContainer(for: CardProfile.self))),
             nfcCoordinator: NFCScanCoordinator()
         ))
     }
