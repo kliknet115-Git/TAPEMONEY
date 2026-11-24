@@ -106,32 +106,45 @@ TAPEMONEY/
 
 ## 🚀 Panduan Menjalankan & Memasang di iPhone
 
-### Persyaratan:
-1. Komputer Mac dengan macOS Sonoma / Ventura.
-2. Xcode 15.0 atau lebih baru.
-3. Apple ID terdaftar (Personal Team gratis atau Apple Developer Program).
-4. iPhone fisik dengan iOS 17+ yang mendukung Core NFC (iPhone 7 hingga iPhone 16 series).
+### 💡 PENTING: Anda Pengguna Windows dan Tidak Punya Mac?
+Tenang, Anda **TIDAK PERLU MAC**! Proyek ini sudah dilengkapi dengan **GitHub Actions CI/CD** yang menggunakan server cloud macOS gratis dari GitHub:
 
-### Langkah Build di Xcode:
+#### Alur Pemasangan Tanpa Mac (Sideload via Windows):
+1. **Push proyek ini ke repositori GitHub Anda**:
+   ```bash
+   # Di Command Prompt / Terminal Windows:
+   git remote add origin https://github.com/USERNAME_ANDA/TAPEMONEY.git
+   git branch -M main
+   git push -u origin main
+   ```
+2. **GitHub Actions otomatis meng-compile aplikasi**:
+   - Buka repositori Anda di browser GitHub.
+   - Klik tab **Actions** di bagian atas.
+   - Anda akan melihat workflow **Build TAPEMONEY iOS IPA** berjalan di server macOS GitHub (memakan waktu ~2-3 menit).
+   - Setelah selesai, klik run tersebut dan unduh berkas **`TAPEMONEY-iOS-IPA`** (berisi file `TAPEMONEY.ipa`).
+3. **Install file `.ipa` ke iPhone dari PC Windows menggunakan Sideloadly**:
+   - Download dan buka software gratis **[Sideloadly](https://sideloadly.io/)** di Windows.
+   - Hubungkan iPhone Anda ke laptop Windows dengan kabel USB (tekan "Trust This Computer" di iPhone jika diminta).
+   - Drag & drop file `TAPEMONEY.ipa` ke aplikasi Sideloadly.
+   - Masukkan Apple ID gratis Anda (email Apple ID Anda).
+   - Klik tombol **Start**. Sideloadly akan secara otomatis menandatangani aplikasi dengan sertifikat gratis Apple dan menginstalnya langsung ke layar iPhone Anda!
+4. **Verifikasi Developer di iPhone**:
+   - Di iPhone Anda, buka **Settings (Pengaturan)** > **General (Umum)** > **VPN & Device Management (Manajemen Perangkat)**.
+   - Pilih Apple ID Anda, lalu ketuk **Trust (Percayai)**.
+   - Aktifkan **Developer Mode** (di iOS 16+) melalui `Settings` > `Privacy & Security` > `Developer Mode` > `On` (iPhone akan restart sekali).
+   - Buka aplikasi **TAPEMONEY** dan siap tap kartu e-money Anda!
+
+---
+
+### Cara Alternatif (Jika Memiliki Komputer Mac):
 1. Buka folder proyek di Mac Anda:
    ```bash
    open TAPEMONEY.xcodeproj
    ```
-2. Pilih target **TAPEMONEY** di navigasi kiri.
-3. Masuk ke tab **Signing & Capabilities**:
-   - Pilih **Team** Anda (Personal Apple ID Anda).
+2. Pilih target **TAPEMONEY** > tab **Signing & Capabilities**:
+   - Pilih **Personal Team** (Apple ID Anda).
    - Pastikan capability **Near Field Communication Tag Reading** aktif.
-4. Hubungkan iPhone fisik Anda ke Mac dengan kabel USB.
-5. Pilih target perangkat: iPhone Anda.
-6. Tekan tombol **Run (Cmd + R)** untuk mem-build dan memasang aplikasi ke iPhone.
-7. Di iPhone: Masuk ke `Settings` > `General` > `VPN & Device Management` dan izinkan sertifikat Developer Anda.
-
-### Mode Simulasi (Xcode Simulator)
-Untuk kenyamanan pengujian antarmuka tanpa iPhone fisik atau tanpa kartu e-money:
-- Jalankan di iOS Simulator.
-- Di Beranda, ketuk menu **titik tiga (•••)** di kanan atas.
-- Pilih **Simulasi Flazz Gen 2**, **Simulasi Mandiri e-money**, dll.
-- Anda dapat menguji seluruh alur pembacaan, tampilan saldo, visual kartu, transaksi, dan penyimpanan lokal!
+3. Hubungkan iPhone fisik dan tekan **Cmd + R** (Run).
 
 ---
 
