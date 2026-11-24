@@ -16,10 +16,10 @@ jobs:
 
       - name: Pilih Versi Xcode
         run: |
-       sudo xcode-select -switch /Applications/Xcode_15.2.app || sudo xcode-select -switch /Applications/Xcode.app
-       xcodebuild -version
+          sudo xcode-select -switch /Applications/Xcode_15.2.app || sudo xcode-select -switch /Applications/Xcode.app
+          xcodebuild -version
 
-      - name: Build TAPEMONEY App (Release)
+      - name: Build TAPEMONEY App
         run: |
           set -e
           xcodebuild -project TAPEMONEY.xcodeproj \
@@ -33,11 +33,12 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             clean build
 
-      - name: Kemas Menjadi Berkas .ipa
+      - name: Kemas Menjadi Berkas IPA
         run: |
           set -e
           mkdir -p build/Payload
           APP_PATH=$(find build/DerivedData -name "TAPEMONEY.app" -type d | head -n 1)
+          echo "Menemukan App di: $APP_PATH"
           cp -R "$APP_PATH" build/Payload/
           cd build
           zip -qr TAPEMONEY.ipa Payload
@@ -48,4 +49,4 @@ jobs:
         with:
           name: TAPEMONEY-iOS-IPA
           path: build/TAPEMONEY.ipa
-          retention-days: 13
+          retention-days: 14
