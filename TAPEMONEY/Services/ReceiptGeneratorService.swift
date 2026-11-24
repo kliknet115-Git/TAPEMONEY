@@ -69,18 +69,17 @@ public final class ReceiptGeneratorService {
         .background(Color(white: 0.94))
 
         let renderer = ImageRenderer(content: receiptView)
+        guard let uiImage = renderer.uiImage else { return nil }
+
         let prefix = singleTransaction != nil ? "Struk_Tunggal" : "Struk_Riwayat"
         let tempURL = FileManager.default.temporaryDirectory
             .appendingPathComponent("\(prefix)_TAPEMONEY_\(Int(Date().timeIntervalSince1970)).pdf")
 
-        renderer.render { size, context in
-            var box = CGRect(origin: .zero, size: size)
-            guard let pdf = CGContext(tempURL as CFURL, mediaBox: &box, nil) else { return }
-            pdf.beginPDFPage(nil)
-            context(pdf)
-            pdf.endPDFPage()
-            pdf.closePDF()
-        }
+        let pageRect = CGRect(origin: .zero, size: uiImage.size)
+        UIGraphicsBeginPDFContextToURL(tempURL as CFURL, pageRect, nil)
+        UIGraphicsBeginPDFPage()
+        uiImage.draw(at: .zero)
+        UIGraphicsEndPDFContext()
 
         return FileManager.default.fileExists(atPath: tempURL.path) ? tempURL : nil
     }
