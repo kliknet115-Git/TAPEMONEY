@@ -14,10 +14,8 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v4
 
-      - name: Pilih Versi Xcode
-        run: |
-       sudo xcode-select -switch /Applications/Xcode_15.4.app || sudo xcode-select -switch /Applications/Xcode.app
-       xcodebuild -version
+      - name: Info Versi Xcode
+        run: xcodebuild -version
 
       - name: Build TAPEMONEY App
         run: |
