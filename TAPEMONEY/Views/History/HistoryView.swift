@@ -1,5 +1,18 @@
 import SwiftUI
 import SwiftData
+import UIKit
+
+/// UIActivityViewController wrapper untuk memunculkan modal share sheet native iOS
+struct ShareSheet: UIViewControllerRepresentable {
+    let activityItems: [Any]
+    let applicationActivities: [UIActivity]? = nil
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+}
 
 /// Halaman Riwayat Scan Kartu Offline (Bab 10.5 PRD)
 /// Mendukung ekspor Struk Belanja Belanja (1 Transaksi Terpilih atau Semua) ke PNG / PDF
