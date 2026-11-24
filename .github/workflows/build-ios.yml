@@ -1,0 +1,51 @@
+name: Build TAPEMONEY iOS IPA
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-ipa:
+    name: Build & Package iOS IPA
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Pilih Versi Xcode
+        run: |
+          sudo xcode-select -switch /Applications/Xcode_15.4.app || sudo xcode-select -switch /Applications/Xcode.app
+          xcodebuild -version
+
+      - name: Build TAPEMONEY App (Release)
+        run: |
+          set -e
+          xcodebuild -project TAPEMONEY.xcodeproj \
+            -scheme TAPEMONEY \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination "generic/platform=iOS" \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            clean build
+
+      - name: Kemas Menjadi Berkas .ipa
+        run: |
+          set -e
+          mkdir -p build/Payload
+          APP_PATH=$(find build/DerivedData -name "TAPEMONEY.app" -type d | head -n 1)
+          cp -R "$APP_PATH" build/Payload/
+          cd build
+          zip -qr TAPEMONEY.ipa Payload
+          cd ..
+
+      - name: Unggah Artefak TAPEMONEY.ipa
+        uses: actions/upload-artifact@v4
+        with:
+          name: TAPEMONEY-iOS-IPA
+          path: build/TAPEMONEY.ipa
+          retention-days: 14
