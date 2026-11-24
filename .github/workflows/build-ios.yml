@@ -8,7 +8,7 @@ on:
 jobs:
   build-ipa:
     name: Build & Package iOS IPA
-    runs-on: macos-13
+    runs-on: macos-latest
 
     steps:
       - name: Checkout Source Code
@@ -16,8 +16,8 @@ jobs:
 
       - name: Pilih Versi Xcode
         run: |
-          sudo xcode-select -switch /Applications/Xcode_15.2.app || sudo xcode-select -switch /Applications/Xcode.app
-          xcodebuild -version
+       sudo xcode-select -switch /Applications/Xcode_15.4.app || sudo xcode-select -switch /Applications/Xcode.app
+       xcodebuild -version
 
       - name: Build TAPEMONEY App
         run: |
