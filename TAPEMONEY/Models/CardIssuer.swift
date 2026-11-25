@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 /// Penerbit kartu uang elektronik yang didukung atau dikenali
-public enum CardIssuer: String, Codable, CaseIterable, Identifiable {
+public enum CardIssuer: String, Codable, CaseIterable, Identifiable, Sendable {
     case bca = "BCA"
     case mandiri = "Mandiri"
     case bni = "BNI"

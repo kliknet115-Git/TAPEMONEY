@@ -21,17 +21,14 @@ public struct APDUCommand: Sendable {
 
     /// Konversi ke `NFCISO7816APDU` native Core NFC
     public func toNFCISO7816APDU() -> NFCISO7816APDU? {
-        guard let apdu = NFCISO7816APDU(
+        NFCISO7816APDU(
             instructionClass: cla,
             instructionCode: ins,
             p1Parameter: p1,
             p2Parameter: p2,
             data: data ?? Data(),
             expectedResponseLength: le ?? -1
-        ) else {
-            return nil
-        }
-        return apdu
+        )
     }
 
     /// Perintah standar ISO 7816-4: SELECT FILE / APPLICATION BY AID
