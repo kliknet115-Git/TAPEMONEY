@@ -199,7 +199,7 @@ Seluruh perubahan ini telah digabungkan (*merged*) ke branch `main` (commit `81a
 | **Core NFC Entitlements Config** | Format TAG & NDEF terdaftar | Entitlements & Info.plist sinkron | ✅ **PASSED** |
 | **AID Hex Format Validation** | Seluruh AID genap & byte-aligned | Seluruh AID 14-hex / 16-hex valid | ✅ **PASSED** |
 | **Multi-Adapter Dynamic Resolution** | Adapter tidak saling memblokir | `CompositeCardAdapter` terpasang | ✅ **PASSED** |
-| **GitHub Actions CI Build** | Menghasilkan IPA & artefak | Tahap kompilasi diperbarui | ⏳ **PENDING RUNNER** |
+| **GitHub Actions CI Build** | Menghasilkan IPA & artefak | Run #18 Berhasil (Conclusion: SUCCESS) | ✅ **PASSED (Centang Hijau)** |
 | **Physical iPhone NFC Scan** | Membaca chip e-money fisik | Memerlukan perangkat iPhone fisik | ⚠️ **NOT TESTED (Manual)** |
 | **Physical Card Balance Read** | Menampilkan saldo kartu | Memerlukan kartu fisik asli | ⚠️ **NOT TESTED (Manual)** |
 | **Physical Card History Read** | Menampilkan log transaksi | Memerlukan kartu fisik asli | ⚠️ **NOT TESTED (Manual)** |
