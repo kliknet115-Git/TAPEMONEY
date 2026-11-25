@@ -1,7 +1,7 @@
 import Foundation
 
 /// Item transaksi domain hasil pembacaan adapter sebelum disimpan ke database
-public struct ParsedTransaction: Identifiable, Sendable {
+public struct ParsedTransaction: Identifiable, Sendable, Equatable {
     public let id = UUID()
     public let date: Date?
     public let amount: Int?
@@ -25,7 +25,7 @@ public struct ParsedTransaction: Identifiable, Sendable {
 }
 
 /// Hasil akhir dari eksekusi adapter pembaca kartu (sesuai Bab 6.4 PRD)
-public struct CardReadResult: Sendable {
+public struct CardReadResult: Sendable, Equatable {
     public let issuer: CardIssuer
     public let cardType: String
     public let cardGeneration: String?

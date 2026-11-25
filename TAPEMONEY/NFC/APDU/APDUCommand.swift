@@ -27,7 +27,7 @@ public struct APDUCommand: Sendable {
             p1Parameter: p1,
             p2Parameter: p2,
             data: data ?? Data(),
-            expectedResponseBodyLength: le ?? -1
+            expectedResponseLength: le ?? -1
         ) else {
             return nil
         }

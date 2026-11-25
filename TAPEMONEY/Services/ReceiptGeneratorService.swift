@@ -76,11 +76,16 @@ public final class ReceiptGeneratorService {
             .appendingPathComponent("\(prefix)_TAPEMONEY_\(Int(Date().timeIntervalSince1970)).pdf")
 
         let pageRect = CGRect(origin: .zero, size: uiImage.size)
-        UIGraphicsBeginPDFContextToURL(tempURL as CFURL, pageRect, nil)
-        UIGraphicsBeginPDFPage()
-        uiImage.draw(at: .zero)
-        UIGraphicsEndPDFContext()
-
-        return FileManager.default.fileExists(atPath: tempURL.path) ? tempURL : nil
+        let pdfRenderer = UIGraphicsPDFRenderer(bounds: pageRect)
+        do {
+            let pdfData = pdfRenderer.pdfData { context in
+                context.beginPage()
+                uiImage.draw(at: .zero)
+            }
+            try pdfData.write(to: tempURL)
+            return tempURL
+        } catch {
+            return nil
+        }
     }
 }

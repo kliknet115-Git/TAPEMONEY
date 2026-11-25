@@ -1,5 +1,5 @@
 import Foundation
-import CoreNFC
+@preconcurrency import CoreNFC
 import Combine
 
 /// Status fase sesi pemindaian NFC
