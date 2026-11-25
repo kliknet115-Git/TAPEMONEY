@@ -26,7 +26,7 @@
 	<string>TAPEMONEY memerlukan akses NFC untuk membaca saldo dan informasi kartu uang elektronik (e-money, Flazz, TapCash, BRIZZI) saat ditempelkan ke iPhone.</string>
 	<key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
 	<array>
-		<string>A00000000300000</string>
+		<string>A000000003000000</string>
 		<string>A000000177000101</string>
 		<string>A0000000040001</string>
 		<string>A0000000050001</string>

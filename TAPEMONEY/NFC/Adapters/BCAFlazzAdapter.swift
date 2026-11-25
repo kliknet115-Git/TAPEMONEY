@@ -9,7 +9,7 @@ public final class BCAFlazzAdapter: EMoneyCardAdapter {
     public let adapterVersion: String = "2.1-pilot"
 
     /// Known Flazz ISO 7816 AID (BCA E-Purse / ISO 7816 Application Identifier)
-    public static let flazzAID = APDUCommand.dataFromHex("A00000000300000") // Standar prefix aplikasi Flazz
+    public static let flazzAID = APDUCommand.dataFromHex("A000000003000000") // Standar prefix aplikasi Flazz (8 bytes)
     public static let flazzGen2AID = APDUCommand.dataFromHex("A000000177000101") // BCA Smartcard AID
 
     public init() {}
