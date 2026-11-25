@@ -6,36 +6,39 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-ipa:
-    name: Build & Package iOS IPA
+  build-and-package:
+    name: Build TAPEMONEY iOS App
     runs-on: macos-latest
 
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
 
-      - name: Info Versi Xcode
-        run: xcodebuild -version
-
-      - name: Build TAPEMONEY App
+      - name: Info Toolchain Xcode
         run: |
-          set -e
-          xcodebuild -project TAPEMONEY.xcodeproj \
-            -target TAPEMONEY \
-            -configuration Release \
-            -sdk iphoneos \
-            SYMROOT=build \
-            CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGN_IDENTITY="" \
-            clean build
+          xcodebuild -version
+          xcode-select -p
 
-      - name: Kemas Menjadi Berkas IPA
+      - name: Build TAPEMONEY App (Release Ad-Hoc)
+        run: |
+          set -o pipefail
+          xcodebuild -project TAPEMONEY.xcodeproj \
+            -scheme TAPEMONEY \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            SYMROOT=build \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=YES \
+            AD_HOC_CODE_SIGNING_ALLOWED=YES \
+            clean build 2>&1 | tee build.log
+
+      - name: Kemas Menjadi Berkas IPA (Sideloadly Ready)
         run: |
           set -e
           mkdir -p build/Payload
           APP_PATH=$(find build -name "TAPEMONEY.app" -type d | head -n 1)
-          echo "Menemukan App di: $APP_PATH"
+          echo "Menemukan Application Bundle: $APP_PATH"
           cp -R "$APP_PATH" build/Payload/
           cd build
           zip -qr TAPEMONEY.ipa Payload
@@ -47,3 +50,11 @@ jobs:
           name: TAPEMONEY-iOS-IPA
           path: build/TAPEMONEY.ipa
           retention-days: 14
+
+      - name: Unggah Log Diagnostik Build
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcodebuild-diagnostic-log
+          path: build.log
+          retention-days: 7
